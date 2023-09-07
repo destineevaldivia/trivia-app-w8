@@ -1,8 +1,6 @@
-# React + Vite
+# Week 8: Build a Trivia Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I've just learned Node, Express, and API concepts (Fetch), I will practice using them to connect with an external API in the Backend. - For this project, I will use a TRIVIA API found here:  https://opentdb.com/api_config.php
 
-Currently, two official plugins are available:
+I will use React to show the game to the user, and will have to grab all the info for the game (how many questions, correctly answer or incorrectly answer) and send it to the Backend to show if the user won or not
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
