@@ -19,8 +19,19 @@ app.get('/api', (req,res) => {
     res.json({message: 'Hola, Destino!'})
 });
 
+//fetch api from webserver
+const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
+fetch(url)
+.then((res) => res.json())
+.then((data) => {
+  res.send({ data })
+})
+.catch((err) => {
+  console.log(err);
+  res.send('An error occurred');
+});
 
-// get server up and running
+//server up and running
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
   });
