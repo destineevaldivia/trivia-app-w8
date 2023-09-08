@@ -20,16 +20,16 @@ app.get('/api', (req,res) => {
 });
 
 //fetch api from webserver
-const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
-fetch(url)
-.then((res) => res.json())
-.then((data) => {
-  res.send({ data })
-})
-.catch((err) => {
-  console.log(err);
-  res.send('An error occurred');
-});
+// const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
+// fetch(url)
+// .then((res) => res.json())
+// .then((data) => {
+//   res.send({ data })
+// })
+// .catch((err) => {
+//   console.log(err);
+//   res.send('An error occurred');
+// });
 
 //server up and running
 app.listen(PORT, () => {
