@@ -43,10 +43,11 @@ function App() {
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
+    const [score, setScore] = useState(0);
 
     const handleAnswerOptionClick = (isCorrect) => {
       if (isCorrect) {
-        alert("the answer is correct!")
+        setScore(score + 1);
       }
 
       const nextQuestion = currentQuestion + 1;
@@ -68,12 +69,12 @@ function App() {
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question 1</span>/{questions.length}
+							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
 						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-            {questions[currentQuestion].answerOptions.map((answerOption, index) => (
+            {questions[currentQuestion].answerOptions.map((answerOption) => (
               <button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
             ))}
 					</div>
