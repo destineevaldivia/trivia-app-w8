@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const questions = [
@@ -44,6 +44,21 @@ function App() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
+
+    
+    useEffect(() => {
+      // Fetch data from your Express server's /api endpoint
+      fetch('/api') // Use the relative path to your Express server
+        .then((response) => response.json())
+        .then((data) => {
+          // Data received from the server
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, []);
+    
 
     const handleAnswerOptionClick = (isCorrect) => {
       if (isCorrect) {
