@@ -3,13 +3,12 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
 
-    const [questions, setQuestions] = useState([{question: '', incorrect_answers:[]}]);
+    const [questions, setQuestions] = useState([{question: '', incorrect_answers:[], correct_answer: ''}]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
 
     useEffect(() => {
-      debugger
       console.log("useEffect Fired")
       const fetchData = async () => {
         try {
