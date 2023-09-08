@@ -57,6 +57,8 @@ function App() {
         </div>
 			) : (
 				<>
+        <h1 className='title'>Vehicle Trivia</h1>
+
 					<div className='question-section'>
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1}</span>/{questions.length}
