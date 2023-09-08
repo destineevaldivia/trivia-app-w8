@@ -42,23 +42,28 @@ function App() {
 	];
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [showScore, setShowScore] = useState(false);
 
-    const handleAnswerOptionClick = (answerOption) => {
+    const handleAnswerOptionClick = (isCorrect) => {
+      if (isCorrect) {
+        alert("the answer is correct!")
+      }
+
       const nextQuestion = currentQuestion + 1;
+
         if (nextQuestion < questions.length){
           setCurrentQuestion(nextQuestion);
       } else {
-          alert('you reached the end of the quiz');
+          setShowScore(true);
       }
-      setCurrentQuestion(nextQuestion);
-    }
+    };
 
   return (
 		<div className='app'>
-			{/* HINT: replace "false" with logic to display the 
-      score when the user has answered all the questions */}
-			{false ? (
-				<div className='score-section'>You scored 1 out of {questions.length}</div>
+			{showScore ? (
+				<div className='score-section'>
+          You scored {score} out of {questions.length}
+        </div>
 			) : (
 				<>
 					<div className='question-section'>
@@ -69,7 +74,7 @@ function App() {
 					</div>
 					<div className='answer-section'>
             {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-              <button onClick={() => handleAnswerOptionClick()}>{answerOption.answerText}</button>
+              <button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
             ))}
 					</div>
 				</>
