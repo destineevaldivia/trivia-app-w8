@@ -2,62 +2,37 @@ import './App.css'
 import React, { useState, useEffect } from 'react';
 
 function App() {
-  const questions = [
-		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
-			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
-			],
-		},
-	];
 
+    const [questions, setQuestions] = useState([{question: '', incorrect_answers:[]}]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
 
-    
     useEffect(() => {
-      // Fetch data from your Express server's /api endpoint
-      fetch('/api') // Use the relative path to your Express server
-        .then((response) => response.json())
-        .then((data) => {
+      debugger
+      console.log("useEffect Fired")
+      const fetchData = async () => {
+        try {
+          // Fetch data from your Express server's /api endpoint
+          const response = await fetch('http://localhost:5005/api'); // Use the relative path to your Express server
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+    
+          const data = await response.json();
           // Data received from the server
           console.log(data);
-        })
-        .catch((error) => {
+    
+          // Update questions state with the fetched data
+          setQuestions(data.results);
+        } catch (error) {
           console.error(error);
-        });
+        }
+      };
+    
+      fetchData();
     }, []);
+    
     
 
     const handleAnswerOptionClick = (isCorrect) => {
@@ -86,11 +61,15 @@ function App() {
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[currentQuestion].questionText}</div>
+						<div className='question-text'>
+            {questions[currentQuestion].question}
+            {questions.length > 0 && questions[currentQuestion].questionText}
+            </div>
+            
 					</div>
 					<div className='answer-section'>
-            {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+            {questions[currentQuestion].incorrect_answers.map((answerOption) => (
+              <button onClick={() => handleAnswerOptionClick(answerOption)}>{answerOption}</button>
             ))}
 					</div>
 				</>
