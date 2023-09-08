@@ -11,25 +11,23 @@ const PORT = 5005;
 
 //create root route endpoint
 app.get('/', (req,res) => {
-    res.json({message: 'This is my roooooot route!'})
+    res.json({message: 'This is my roooooot route! Go here--->  http://localhost:5173/'})
 });
 
 //create endpoint for /api
 app.get('/api', (req,res) => {
-    res.json({message: 'Hola, Destino!'})
+    const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
+    //use fetch to make an HTTP GET request to the specified URL
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => res.json(data))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred' });
+        });
 });
 
-//fetch api from webserver
-// const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
-// fetch(url)
-// .then((res) => res.json())
-// .then((data) => {
-//   res.send({ data })
-// })
-// .catch((err) => {
-//   console.log(err);
-//   res.send('An error occurred');
-// });
+
 
 //server up and running
 app.listen(PORT, () => {
