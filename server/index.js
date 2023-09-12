@@ -9,24 +9,23 @@ app.use(cors())
 //Set the port that you want the server to run on
 const PORT = 5005;
 
-//create root route endpoint
+//root route
 app.get('/', (req,res) => {
     res.json({message: 'This is my roooooot route! Go here--->  http://localhost:5173/'})
 });
 
-//create endpoint for /api
+//GET route definition for /api path from external API
 app.get('/api', (req,res) => {
     const url = 'https://opentdb.com/api.php?amount=10&category=28&difficulty=easy&type=multiple'
     //use fetch to make an HTTP GET request to the specified URL
     fetch(url)
         .then((response) => response.json())
         .then((data) => res.json(data))
-        .catch((err) => {
+        .catch((err) => {  
             console.error(err);
             res.status(500).json({ error: 'An error occurred' });
         });
 });
-
 
 
 //server up and running
